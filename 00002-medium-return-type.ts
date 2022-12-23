@@ -6,6 +6,10 @@ type MyReturnType<T extends (...args: any[]) => any> = T extends (
   ? A
   : never;
 
+type MyReturnType2<T extends Function> = T extends (...a: any[]) => infer A
+  ? A
+  : never;
+
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils';
 
