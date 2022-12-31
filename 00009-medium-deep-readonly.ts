@@ -1,48 +1,14 @@
-/*
-  9 - Deep Readonly
-  -------
-  by Anthony Fu (@antfu) #medium #readonly #object-keys #deep
-
-  ### Question
-
-  Implement a generic `DeepReadonly<T>` which make every parameter of an object - and its sub-objects recursively - readonly.
-
-  You can assume that we are only dealing with Objects in this challenge. Arrays, Functions, Classes and so on do not need to be taken into consideration. However, you can still challenge yourself by covering as many different cases as possible.
-
-  For example:
-
-  ```ts
-  type X = {
-    x: {
-      a: 1
-      b: 'hi'
-    }
-    y: 'hey'
-  }
-
-  type Expected = {
-    readonly x: {
-      readonly a: 1
-      readonly b: 'hi'
-    }
-    readonly y: 'hey'
-  }
-
-  type Todo = DeepReadonly<X> // should be same as `Expected`
-  ```
-
-  > View on GitHub: https://tsch.js.org/9
-*/
-
 /* _____________ Your Code Here _____________ */
 
+// T[i]가 객체 형태라면 DeepReadonly 이어야 한다. 근데 이제 함수는 제외한.
 type DeepReadonly<T> = {
-  readonly [P in keyof T]: T[P] extends {}
-    ? T[P] extends () => {}
-      ? T[P]
-      : DeepReadonly<T[P]>
-    : T[P];
+  readonly [i in keyof T]: T[i] extends object
+    ? T[i] extends Function
+      ? T[i]
+      : DeepReadonly<T[i]>
+    : T[i];
 };
+
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils';
 
