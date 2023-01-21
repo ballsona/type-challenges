@@ -1,10 +1,8 @@
 /* _____________ Your Code Here _____________ */
 
-type isEqual<T, S> = [T] extends [S] ? ([S] extends [T] ? true : false) : false;
-
-type isEqual2<X, Y> = (<T>() => T extends X ? 1 : 2) extends <
-  T,
->() => T extends Y ? 1 : 2
+type isEqual<X, Y> = (<T>() => T extends X ? 1 : 2) extends <T>() => T extends Y
+  ? 1
+  : 2
   ? true
   : false;
 
