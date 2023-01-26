@@ -2,10 +2,10 @@
 
 type whitespace = ' ' | '\n' | '\t';
 
-type Trim<S extends string> = S extends `${whitespace}${infer R}`
-  ? Trim<R>
-  : S extends `${infer RR}${whitespace}`
-  ? Trim<RR>
+type Trim<S extends string> = S extends `${whitespace}${infer Rest1}`
+  ? Trim<Rest1>
+  : S extends `${infer Rest2}${whitespace}`
+  ? Trim<Rest2>
   : S;
 
 /* _____________ Test Cases _____________ */
