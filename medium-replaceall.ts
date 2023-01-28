@@ -7,7 +7,7 @@ type ReplaceAll<
 > = From extends ''
   ? S
   : S extends `${infer L}${From}${infer R}`
-  ? `${ReplaceAll<L, From, To>}${To}${ReplaceAll<R, From, To>}`
+  ? `${L}${To}${ReplaceAll<R, From, To>}`
   : S;
 
 /* _____________ Test Cases _____________ */
